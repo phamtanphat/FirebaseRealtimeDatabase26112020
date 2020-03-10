@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,5 +51,43 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+        // 3 : Gửi dữ liệu object
+//        myRef.child("sinhvien").setValue(new Sinhvien("Nguyen Van Teo",22)).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()){
+//                    Toast.makeText(MainActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+        // 4 : Gửi mảng sinh viên
+        ArrayList<Sinhvien> sinhviens = new ArrayList<>();
+        sinhviens.add(new Sinhvien("Nguyen Van A",20));
+        sinhviens.add(new Sinhvien("Nguyen Van B",21));
+        sinhviens.add(new Sinhvien("Nguyen Van C",22));
+        sinhviens.add(new Sinhvien("Nguyen Van D",23));
+        sinhviens.add(new Sinhvien("Nguyen Van E",24));
+//        myRef.child("danhsach").setValue(sinhviens).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()){
+//                    Toast.makeText(MainActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+        myRef.child("danhsach").push().setValue(new Sinhvien("Nguyen Van F",25)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
