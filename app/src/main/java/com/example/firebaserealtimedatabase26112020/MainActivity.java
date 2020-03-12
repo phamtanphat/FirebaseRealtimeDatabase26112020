@@ -122,11 +122,24 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         // 2 : Lay dữ liệu dạng hashmap
-        myRef.child("phuongtien").addValueEventListener(new ValueEventListener() {
+//        myRef.child("phuongtien").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//               HashMap<String, String> map = (HashMap<String, String>) dataSnapshot.getValue();
+//               Log.d("BBB",map.toString());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        //3 : Lay du lieu dang object
+        myRef.child("sinhvien").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               HashMap<String, String> map = (HashMap<String, String>) dataSnapshot.getValue();
-               Log.d("BBB",map.toString());
+                Sinhvien sinhvien = (Sinhvien) dataSnapshot.getValue(Sinhvien.class);
+                Log.d("BBB",sinhvien.toString());
             }
 
             @Override
