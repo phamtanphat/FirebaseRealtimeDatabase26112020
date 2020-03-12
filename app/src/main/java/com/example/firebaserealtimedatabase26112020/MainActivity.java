@@ -1,6 +1,7 @@
 package com.example.firebaserealtimedatabase26112020;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -135,11 +137,41 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         //3 : Lay du lieu dang object
-        myRef.child("sinhvien").addValueEventListener(new ValueEventListener() {
+//        myRef.child("sinhvien").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Sinhvien sinhvien = (Sinhvien) dataSnapshot.getValue(Sinhvien.class);
+//                Log.d("BBB",sinhvien.toString());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        myRef.child("danhsach").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Sinhvien sinhvien = (Sinhvien) dataSnapshot.getValue(Sinhvien.class);
-                Log.d("BBB",sinhvien.toString());
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Sinhvien sinhvien = dataSnapshot.getValue(Sinhvien.class);
+                Log.d("BBB",dataSnapshot.getKey());
+                Log.d("BBB",sinhvien.getName());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Sinhvien sinhvien = dataSnapshot.getValue(Sinhvien.class);
+                Log.d("BBB",dataSnapshot.getKey());
+                Log.d("BBB",sinhvien.getName());
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
