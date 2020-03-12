@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,11 +97,36 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // 1 : Đọc dữ liệu dang string
-        myRef.child("android").addValueEventListener(new ValueEventListener() {
+//        myRef.child("android").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String value = dataSnapshot.getValue().toString();
+//                Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String value = dataSnapshot.getValue().toString();
+//                Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        // 2 : Lay dữ liệu dạng hashmap
+        myRef.child("phuongtien").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue().toString();
-                Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
+               HashMap<String, String> map = (HashMap<String, String>) dataSnapshot.getValue();
+               Log.d("BBB",map.toString());
             }
 
             @Override
@@ -106,6 +134,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }
